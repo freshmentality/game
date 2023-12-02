@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <base target="_top">
+  <style>
+    html {
+      background: url('https://drive.google.com/uc?id=1q2IU5PQj8x710SfKzXb3VL-BVP7JDKOe') no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      height: 100%;
+    }
+
+    #scratch-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 188px);
+  grid-gap: 10px;
+  justify-content: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.scratch-card {
+  height: 100px;
+  cursor: pointer;
+  box-sizing: border-box;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* ... other styles ... */
+}
+
+
+    .prize-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      font-size: 16px;
+      color: #333;
+      font-weight: bold; /* Make the text bold */
+      display: none; /* Hide the prize text by default */
+    }
+
+    #log {
+      margin-top: 20px;
+    }
+
+    #login-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    #credits-container {
+      display: none; /* Hide the credits container by default */
+      margin-top: 20px;
+    }
+
+    #user-id-label {
+      display: block;
+      margin-top: 10px;
+    }
+
+    #shuffle-button {
+      margin-top: 20px;
+    }
+
+    #game-name {
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="game-name">
+    Loot Scratch
+  </div>
+  <div id="scratch-cards">
+    <div class="scratch-card" style="background-image: url('https://drive.google.com/uc?id=1d39YWOCQw5KRAbn8EuOPi2PkPqfChJ09');" onclick="scratch(0)">
+      <p class="prize-text"></p>
+    </div>
+    <div class="scratch-card" style="background-image: url('https://drive.google.com/uc?id=1d39YWOCQw5KRAbn8EuOPi2PkPqfChJ09');" onclick="scratch(1)">
+      <p class="prize-text"></p>
+    </div>
+    <div class="scratch-card" style="background-image: url('https://drive.google.com/uc?id=1d39YWOCQw5KRAbn8EuOPi2PkPqfChJ09');" onclick="scratch(2)">
+      <p class="prize-text"></p>
+    </div>
+    <div class="scratch-card" style="background-image: url('https://drive.google.com/uc?id=1d39YWOCQw5KRAbn8EuOPi2PkPqfChJ09');" onclick="scratch(3)">
+      <p class="prize-text"></p>
+    </div>
+    <div class="scratch-card" style="background-image: url('https://drive.google.com/uc?id=1d39YWOCQw5KRAbn8EuOPi2PkPqfChJ09');" onclick="scratch(4)">
+      <p class="prize-text"></p>
+    </div>
+    <div class="scratch-card" style="background-image: url('https://drive.google.com/uc?id=1d39YWOCQw5KRAbn8EuOPi2PkPqfChJ09');" onclick="scratch(5)">
+      <p class="prize-text"></p>
+    </div>
+    <div class="scratch-card" style="background-image: url('https://drive.google.com/uc?id=1d39YWOCQw5KRAbn8EuOPi2PkPqfChJ09');" onclick="scratch(6)">
+      <p class="prize-text"></p>
+    </div>
+    <div class="scratch-card" style="background-image: url('https://drive.google.com/uc?id=1d39YWOCQw5KRAbn8EuOPi2PkPqfChJ09');" onclick="scratch(7)">
+      <p class="prize-text"></p>
+    </div>
+    <div class="scratch-card" style="background-image: url('https://drive.google.com/uc?id=1d39YWOCQw5KRAbn8EuOPi2PkPqfChJ09');" onclick="scratch(8)">
+      <p class="prize-text"></p>
+    </div>
+  </div>
+
+  <div id="credits-container">
+    <h3>Your Credits:</h3>
+    <p id="userCredits">0</p>
+    <button onclick="shuffle()">Shuffle</button>
+  </div>
+
+  <div id="login-container">
+    <label for="userId">Enter Your ID:</label>
+    <input type="text" id="userId" autocomplete="off" placeholder="Enter Your ID" />
+    <button onclick="login()">Login</button>
+    <span id="user-id-label">Note: Use your own Torn City ID for login.</span>
+  </div>
+
+  <div id="log">
+    <h3>Winnings Log:</h3>
+  </div>
+
+  <script>
+    var isCardClicked = false;
+
+    function scratch(index) {
+  var userId = document.getElementById('userId').value;
+
+  if (!userId) {
+    alert('Please login to scratch cards.');
+    return;
+  }
+
+  var userCredits = document.getElementById('userCredits').innerHTML;
+
+  if (userCredits == 0) {
+    alert('You do not have any credits. Buy some from Freshmentality');
+    return;
+  }
+
+  if (!isCardClicked) {
+    var element = document.getElementsByClassName('scratch-card')[index];
+    element.style.backgroundImage = 'none'; // Remove background image
+    var prizeText = element.querySelector('.prize-text');
+    prizeText.style.display = 'none'; // Hide the prize text
+
+        var prizeList = [
+          { name: "1x Xanax", image: "https://drive.google.com/uc?id=1lGgoA9-Wpq8-mfgE-Dv29zoCgdCQsUeL" },
+          { name: "1x Vicodin", image: "https://drive.google.com/uc?id=1knm7TVJhkv8E74GljXnmdBS7wbJSVqYm" },
+          { name: "10x Vicodin", image: "https://drive.google.com/uc?id=1knm7TVJhkv8E74GljXnmdBS7wbJSVqYm" },
+          { name: "1x Kitten Plushie", image: "https://drive.google.com/uc?id=1UZy70do3ofkie91iVLNkaSNLLUTYM-LQ" },
+          { name: "1x Grenade", image: "https://drive.google.com/uc?id=1q_OpGz0PsI-wMwSfhg5TRQcgwNZBuS51" },
+          { name: "1x HEG", image: "https://drive.google.com/uc?id=1WoClyTUq1m1pxEJ26AmkFJU40lC7Ls18" },
+          { name: "1x Pepper Spray ", image: "https://drive.google.com/uc?id=1Az0RMLpiG2R3S1STh3dk_23M2F7iSx-l" },
+          { name: "1x Monkey Plushie", image: "https://drive.google.com/uc?id=1PRtyhVFGaY9Z3ZWlzY-33dzJKzO1UnqQ" },
+          { name: "1x Hammer", image: "https://drive.google.com/uc?id=16FTL7CuOueLdH9ZLMrElQm365iJfMv5W" },
+          { name: "1x Can of Damp Valley", image: "https://drive.google.com/uc?id=1vxwdzvMy5peCXO9M0eSHfOa-W-V6O4fV" },
+          { name: "1x Feathery Hotel Coupon", image: "https://drive.google.com/uc?id=1vaBQVCcuTC0JombhatEfrFu_ybvyTAps" },
+          { name: "1$ Cash", image: "https://drive.google.com/uc?id=1eVbdh_CR6z2OfjJOFwGueRkTamwK7cKe" },
+          { name: "1x First Aid Kit", image: "https://drive.google.com/uc?id=1h1VUesCwVv31oWf_Ir-BoYpxRPCbLfIy" },
+          { name: "1x Leather Gloves", image: "https://drive.google.com/uc?id=1IeVf0AmLA09VGYIJjyquflCCOMriQSur" },
+          { name: "10,000$ Cash", image: "https://drive.google.com/uc?id=1eVbdh_CR6z2OfjJOFwGueRkTamwK7cKe" },
+          { name: "100,000$ Cash", image: "https://drive.google.com/uc?id=1eVbdh_CR6z2OfjJOFwGueRkTamwK7cKe" },
+          { name: "1x Lollipop", image: "https://drive.google.com/uc?id=1FaMDgtf2vB7aNPDU6-VCIF-l_p1l0Dp8" },
+          { name: "1x Erotic DVD", image: "https://drive.google.com/uc?id=1xDIbiRwg4W3I7kDn-A57Nv3Jnh0q-17N" },
+          { name: "1x Bottle of Beer", image: "https://drive.google.com/uc?id=14h1-X8HbwSa4czIWoAar6GrwsTq5b463" },
+          { name: "10x Bottle of Beer", image: "https://drive.google.com/uc?id=14h1-X8HbwSa4czIWoAar6GrwsTq5b463" },
+          { name: "1x Ketamine", image: "https://drive.google.com/uc?id=1qbYeVjjNccD_xDq81DmUzydxCdzLaZoe" },
+          { name: "1,000,000$ Cash", image: "https://drive.google.com/uc?id=1eVbdh_CR6z2OfjJOFwGueRkTamwK7cKe" },
+          { name: "1x Shrooms", image: "https://drive.google.com/uc?id=1p1_t_1uXWZPqVuoVOZQ7PNaK_Vn7nTEf" },
+          { name: "1x Can of Munster", image: "https://drive.google.com/uc?id=1jbmELQUJbbK6wOhdKR75Pozs0yMweqE0" },
+          { name: "250,000$ Cash", image: "https://drive.google.com/uc?id=1eVbdh_CR6z2OfjJOFwGueRkTamwK7cKe" },
+          { name: "1x Flash Grenade", image: "https://drive.google.com/uc?id=1bUBm57ABqcHTQAlPFXCIml7xZxUuJEUZ" },
+          { name: "1x Trout", image: "https://drive.google.com/uc?id=1wE8gxBMG2gikWPg1aJd2SdyXSrWbL-dG" },
+          { name: "10x Fireworks", image: "https://drive.google.com/uc?id=1zxxceOlLP9C0wxEdNyug7JSFDFTDIDJj" },
+          { name: "150,000$ Cash", image: "https://drive.google.com/uc?id=1eVbdh_CR6z2OfjJOFwGueRkTamwK7cKe" },
+          { name: "50,000$ Cash", image: "https://drive.google.com/uc?id=1eVbdh_CR6z2OfjJOFwGueRkTamwK7cKe" },
+          { name: "5x Stingray Plushie", image: "https://drive.google.com/uc?id=1hi03M1Q5FrdcWlt4GJ3HMawyomOVn1no" },
+          { name: "3x Wolverine Plushie", image: "https://drive.google.com/uc?id=1LFGBWksHKJPwMokIEGgbOi4_Bk7foBhp" },
+          { name: "10x Teddy Bear Plushie", image: "https://drive.google.com/uc?id=1jbLscXNVur4pio61r_ZKzgMmE5GJnxCb" },
+          { name: "1x Panda Plushie", image: "https://drive.google.com/uc?id=1EmmVYbjxQ34bm0eBLGg3uvNJ9luCTJ03" },
+          { name: "1x Lion Plushie", image: "https://drive.google.com/uc?id=1to6Y3-Nd5HBXVMJLJSrz9_6Txl9uOT8S" },
+          { name: "2x Nessie Plushie", image: "https://drive.google.com/uc?id=1tui10o1tfaYymYSN_wib9BMZ-jdEYIdQ" },
+          { name: "1x Red Fox Plushie", image: "https://drive.google.com/uc?id=1kFDab7DQmF63s4LGmixua63iXu9mGDYs" },
+          { name: "1x Bottle of Champagne", image: "https://drive.google.com/uc?id=1uZ8H6uohm0d8sbiMXrWhYvts4b2h9ndG" },
+          { name: "10x Bottle of Champagne", image: "https://drive.google.com/uc?id=1uZ8H6uohm0d8sbiMXrWhYvts4b2h9ndG" },
+          { name: "1x Speed", image: "https://drive.google.com/uc?id=1PLEG0Zoy7ELKFMKNzxWUqtB08AUDBzFi" },
+          { name: "1x Xanax", image: "https://drive.google.com/uc?id=1lGgoA9-Wpq8-mfgE-Dv29zoCgdCQsUeL" },
+          { name: "1x Vicodin", image: "https://drive.google.com/uc?id=1knm7TVJhkv8E74GljXnmdBS7wbJSVqYm" },
+          { name: "10x Vicodin", image: "https://drive.google.com/uc?id=1knm7TVJhkv8E74GljXnmdBS7wbJSVqYm" },
+          { name: "1x Kitten Plushie", image: "https://drive.google.com/uc?id=1UZy70do3ofkie91iVLNkaSNLLUTYM-LQ" },
+          { name: "1x Grenade", image: "https://drive.google.com/uc?id=1q_OpGz0PsI-wMwSfhg5TRQcgwNZBuS51" },
+          { name: "1x HEG", image: "https://drive.google.com/uc?id=1WoClyTUq1m1pxEJ26AmkFJU40lC7Ls18" },
+          { name: "1x Pepper Spray ", image: "https://drive.google.com/uc?id=1Az0RMLpiG2R3S1STh3dk_23M2F7iSx-l" },
+          { name: "1x Monkey Plushie", image: "https://drive.google.com/uc?id=1PRtyhVFGaY9Z3ZWlzY-33dzJKzO1UnqQ" },
+          { name: "1x Hammer", image: "https://drive.google.com/uc?id=16FTL7CuOueLdH9ZLMrElQm365iJfMv5W" },
+          { name: "1x Can of Damp Valley", image: "https://drive.google.com/uc?id=1vxwdzvMy5peCXO9M0eSHfOa-W-V6O4fV" },
+          { name: "1$ Cash", image: "https://drive.google.com/uc?id=1eVbdh_CR6z2OfjJOFwGueRkTamwK7cKe" },
+          { name: "1x First Aid Kit", image: "https://drive.google.com/uc?id=1h1VUesCwVv31oWf_Ir-BoYpxRPCbLfIy" },
+          { name: "1x Leather Gloves", image: "https://drive.google.com/uc?id=1IeVf0AmLA09VGYIJjyquflCCOMriQSur" },
+          { name: "10,000$ Cash", image: "https://drive.google.com/uc?id=1eVbdh_CR6z2OfjJOFwGueRkTamwK7cKe" },
+          { name: "100,000$ Cash", image: "https://drive.google.com/uc?id=1eVbdh_CR6z2OfjJOFwGueRkTamwK7cKe" },
+          { name: "1x Lollipop", image: "https://drive.google.com/uc?id=1FaMDgtf2vB7aNPDU6-VCIF-l_p1l0Dp8" },
+          { name: "1x Bottle of Beer", image: "https://drive.google.com/uc?id=14h1-X8HbwSa4czIWoAar6GrwsTq5b463" },
+          { name: "10x Bottle of Beer", image: "https://drive.google.com/uc?id=14h1-X8HbwSa4czIWoAar6GrwsTq5b463" },
+          { name: "1x Ketamine", image: "https://drive.google.com/uc?id=1qbYeVjjNccD_xDq81DmUzydxCdzLaZoe" },
+          { name: "1,000,000$ Cash", image: "https://drive.google.com/uc?id=1eVbdh_CR6z2OfjJOFwGueRkTamwK7cKe" },
+          { name: "1x Shrooms", image: "https://drive.google.com/uc?id=1p1_t_1uXWZPqVuoVOZQ7PNaK_Vn7nTEf" },
+          { name: "1x Can of Munster", image: "https://drive.google.com/uc?id=1jbmELQUJbbK6wOhdKR75Pozs0yMweqE0" },
+          { name: "250,000$ Cash", image: "https://drive.google.com/uc?id=1eVbdh_CR6z2OfjJOFwGueRkTamwK7cKe" },
+          { name: "1x Flash Grenade", image: "https://drive.google.com/uc?id=1bUBm57ABqcHTQAlPFXCIml7xZxUuJEUZ" },
+          { name: "1x Trout", image: "https://drive.google.com/uc?id=1wE8gxBMG2gikWPg1aJd2SdyXSrWbL-dG" },
+          { name: "10x Fireworks", image: "https://drive.google.com/uc?id=1zxxceOlLP9C0wxEdNyug7JSFDFTDIDJj" },
+          { name: "150,000$ Cash", image: "https://drive.google.com/uc?id=1eVbdh_CR6z2OfjJOFwGueRkTamwK7cKe" },
+          { name: "50,000$ Cash", image: "https://drive.google.com/uc?id=1eVbdh_CR6z2OfjJOFwGueRkTamwK7cKe" },
+          { name: "5x Stingray Plushie", image: "https://drive.google.com/uc?id=1hi03M1Q5FrdcWlt4GJ3HMawyomOVn1no" },
+          { name: "3x Wolverine Plushie", image: "https://drive.google.com/uc?id=1LFGBWksHKJPwMokIEGgbOi4_Bk7foBhp" },
+          { name: "10x Teddy Bear Plushie", image: "https://drive.google.com/uc?id=1jbLscXNVur4pio61r_ZKzgMmE5GJnxCb" },
+          { name: "1x Panda Plushie", image: "https://drive.google.com/uc?id=1EmmVYbjxQ34bm0eBLGg3uvNJ9luCTJ03" },
+          { name: "1x Lion Plushie", image: "https://drive.google.com/uc?id=1to6Y3-Nd5HBXVMJLJSrz9_6Txl9uOT8S" },
+          { name: "2x Nessie Plushie", image: "https://drive.google.com/uc?id=1tui10o1tfaYymYSN_wib9BMZ-jdEYIdQ" },
+          { name: "1x Red Fox Plushie", image: "https://drive.google.com/uc?id=1kFDab7DQmF63s4LGmixua63iXu9mGDYs" },
+          { name: "1x Bottle of Champagne", image: "https://drive.google.com/uc?id=1uZ8H6uohm0d8sbiMXrWhYvts4b2h9ndG" },
+          { name: "10x Bottle of Champagne", image: "https://drive.google.com/uc?id=1uZ8H6uohm0d8sbiMXrWhYvts4b2h9ndG" },
+          { name: "1x Speed", image: "https://drive.google.com/uc?id=1PLEG0Zoy7ELKFMKNzxWUqtB08AUDBzFi" },
+          { name: "10x Xanax", image: "https://drive.google.com/uc?id=1lGgoA9-Wpq8-mfgE-Dv29zoCgdCQsUeL" },
+          { name: "1x Vicodin", image: "https://drive.google.com/uc?id=1knm7TVJhkv8E74GljXnmdBS7wbJSVqYm" },
+          { name: "10x Vicodin", image: "https://drive.google.com/uc?id=1knm7TVJhkv8E74GljXnmdBS7wbJSVqYm" },
+          { name: "1x Kitten Plushie", image: "https://drive.google.com/uc?id=1UZy70do3ofkie91iVLNkaSNLLUTYM-LQ" },
+          { name: "1x Grenade", image: "https://drive.google.com/uc?id=1q_OpGz0PsI-wMwSfhg5TRQcgwNZBuS51" },
+          { name: "1x HEG", image: "https://drive.google.com/uc?id=1WoClyTUq1m1pxEJ26AmkFJU40lC7Ls18" },
+          { name: "1x Pepper Spray ", image: "https://drive.google.com/uc?id=1Az0RMLpiG2R3S1STh3dk_23M2F7iSx-l" },
+          { name: "1x Monkey Plushie", image: "https://drive.google.com/uc?id=1PRtyhVFGaY9Z3ZWlzY-33dzJKzO1UnqQ" },
+          { name: "1x Hammer", image: "https://drive.google.com/uc?id=16FTL7CuOueLdH9ZLMrElQm365iJfMv5W" },
+          { name: "1x Can of Damp Valley", image: "https://drive.google.com/uc?id=1vxwdzvMy5peCXO9M0eSHfOa-W-V6O4fV" },
+          { name: "1x Feathery Hotel Coupon", image: "https://drive.google.com/uc?id=1vaBQVCcuTC0JombhatEfrFu_ybvyTAps" },
+          { name: "1$ Cash", image: "https://drive.google.com/uc?id=1eVbdh_CR6z2OfjJOFwGueRkTamwK7cKe" },
+          { name: "1x First Aid Kit", image: "https://drive.google.com/uc?id=1h1VUesCwVv31oWf_Ir-BoYpxRPCbLfIy" },
+          { name: "1x Leather Gloves", image: "https://drive.google.com/uc?id=1IeVf0AmLA09VGYIJjyquflCCOMriQSur" },
+          { name: "10,000$ Cash", image: "https://drive.google.com/uc?id=1eVbdh_CR6z2OfjJOFwGueRkTamwK7cKe" },
+          { name: "100,000$ Cash", image: "https://drive.google.com/uc?id=1eVbdh_CR6z2OfjJOFwGueRkTamwK7cKe" },
+          { name: "1x Lollipop", image: "https://drive.google.com/uc?id=1FaMDgtf2vB7aNPDU6-VCIF-l_p1l0Dp8" },
+          { name: "1x Erotic DVD", image: "https://drive.google.com/uc?id=1xDIbiRwg4W3I7kDn-A57Nv3Jnh0q-17N" },
+          { name: "1x Bottle of Beer", image: "https://drive.google.com/uc?id=14h1-X8HbwSa4czIWoAar6GrwsTq5b463" },
+          { name: "10x Bottle of Beer", image: "https://drive.google.com/uc?id=14h1-X8HbwSa4czIWoAar6GrwsTq5b463" },
+          { name: "1x Ketamine", image: "https://drive.google.com/uc?id=1qbYeVjjNccD_xDq81DmUzydxCdzLaZoe" },
+          { name: "1,000,000$ Cash", image: "https://drive.google.com/uc?id=1eVbdh_CR6z2OfjJOFwGueRkTamwK7cKe" },
+          // Add other prizes with their corresponding image URLs
+        ];
+        var randomPrize = prizeList[Math.floor(Math.random() * prizeList.length)];
+
+        if (typeof randomPrize === 'object') {
+      // If the prize is an object, assume it has 'name' and 'image' properties
+      prizeText.innerHTML = 'You won: ' + randomPrize.name + ' - Congrats!';
+      // Now, set the background image using the 'image' property
+      element.style.backgroundImage = 'url(\'' + randomPrize.image + '\')';
+    } else {
+      // If it's not an object, treat it as a simple text prize
+      prizeText.innerHTML = 'You won: ' + randomPrize + ' - Congrats!';
+    }
+
+    // Log the winning in the log area
+    var logArea = document.getElementById('log');
+    var logMessage = document.createElement('p');
+    logMessage.innerHTML = 'You won: ' + randomPrize.name + ' - Congrats!';
+    logArea.appendChild(logMessage);
+
+    // Deduct one credit from the user
+    var updatedCredits = parseInt(userCredits, 10) - 1;
+    document.getElementById('userCredits').innerHTML = updatedCredits;
+
+    // Log the scratch event to the spreadsheet and update user credits
+    google.script.run.withSuccessHandler(updateCredits).onScratch(userId, updatedCredits, randomPrize);
+    isCardClicked = true;
+  }
+}
+
+    function login() {
+      var userId = document.getElementById('userId').value;
+      if (userId) {
+        google.script.run.withSuccessHandler(updateCredits).onLogin(userId);
+      }
+    }
+
+    function updateCredits(credits) {
+      var creditsContainer = document.getElementById('credits-container');
+      var userCredits = document.getElementById('userCredits');
+      userCredits.innerHTML = credits;
+      creditsContainer.style.display = 'block';
+
+      // Enable or disable the Shuffle button based on user credits
+      var shuffleButton = document.getElementById('shuffle-button');
+      shuffleButton.disabled = credits === 0;
+    }
+
+    function shuffle() {
+      // Add logic to shuffle the cards and reset the interface for the next round
+      // ...
+
+      // Reset card styles and content
+      var cards = document.getElementsByClassName('scratch-card');
+      for (var i = 0; i < cards.length; i++) {
+        cards[i].style.backgroundImage = 'url(\'https://drive.google.com/uc?id=1d39YWOCQw5KRAbn8EuOPi2PkPqfChJ09\')';
+        var prizeText = cards[i].querySelector('.prize-text');
+        prizeText.innerHTML = '';
+        prizeText.style.display = 'none'; // Hide the prize text
+      }
+
+      // Reset the isCardClicked flag
+      isCardClicked = false;
+
+      // Enable the Shuffle button after shuffling
+      var shuffleButton = document.getElementById('shuffle-button');
+      shuffleButton.disabled = false;
+    }
+  </script>
+</body>
+
+</html>
